@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-06-28T21:00:10 EET" name="Smoke" finished-at="2021-06-28T21:02:48 EET" duration-ms="157899">
+    <groups>
+    </groups>
+    <test started-at="2021-06-28T21:00:10 EET" name="Calculator" finished-at="2021-06-28T21:02:48 EET" duration-ms="157899">
+      <class name="hardcore.test.CalculatorTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:hardcore.test.CalculatorTest@780cb77]" started-at="2021-06-28T21:00:10 EET" name="setUp" finished-at="2021-06-28T21:00:15 EET" duration-ms="4527" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="totalCostInMailEqualsCalculatorValue()[pri:0, instance:hardcore.test.CalculatorTest@780cb77]" started-at="2021-06-28T21:00:15 EET" name="totalCostInMailEqualsCalculatorValue" description="My first automated test" finished-at="2021-06-28T21:02:41 EET" duration-ms="146138" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- totalCostInMailEqualsCalculatorValue -->
+        <test-method is-config="true" signature="stopBrowser()[pri:0, instance:hardcore.test.CalculatorTest@780cb77]" started-at="2021-06-28T21:02:41 EET" name="stopBrowser" finished-at="2021-06-28T21:02:48 EET" duration-ms="7165" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- stopBrowser -->
+      </class> <!-- hardcore.test.CalculatorTest -->
+    </test> <!-- Calculator -->
+  </suite> <!-- Smoke -->
+</testng-results>
