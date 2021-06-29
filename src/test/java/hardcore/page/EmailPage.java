@@ -17,9 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 public class EmailPage extends AbstractPage{
     private final Logger logger = LogManager.getRootLogger();
-    private final String MAIL_URL = "https://10minutemail.com";
+    private final String MAIL_URL = "https://10minemail.net/";
 
-    @FindBy(xpath = "//div[@id='copy_address']")
+    @FindBy(xpath = "//button[@class='icon__btn copy__btn']")
     private WebElement copyEmailButton;
 
     @FindBy(xpath = "//span[contains (text(), 'Google Cloud')]")
@@ -37,7 +37,7 @@ public class EmailPage extends AbstractPage{
 
     public String copyMailAddress() throws IOException, UnsupportedFlavorException {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='mail_address']")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='icon__btn copy__btn']")));
         copyEmailButton.click();
         String myText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
         logger.info("Email address was copied successfully");
@@ -46,8 +46,8 @@ public class EmailPage extends AbstractPage{
 
     public String getTotalCostFromEmailPage(){
         new WebDriverWait(driver, 200)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains (text(), 'Google Cloud')]")));
-        openNewLetter.click();
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains (text(), 'Google Cloud')]"))).click();
+//        openNewLetter.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains (text(), 'USD')]")));
         String monthlyCost = driver.findElement(By.xpath("//h3[contains (text(), 'USD')]")).getText();
