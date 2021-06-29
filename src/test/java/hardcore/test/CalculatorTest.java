@@ -27,13 +27,13 @@ public class CalculatorTest extends AdditionalConditions{
                 .goToCalculatorPage()
                 .switchToFrame()
                 .clickComputeEngine()
-                .setNumberOfInstances(testData)
-                .setSoftware(testData)
-                .setMachineClass(testData)
-                .setMachineType(testData)
+                .setNumberOfInstances(testData.getInstances())
+                .setSoftware(testData.getSoftware())
+                .setMachineClass(testData.getMachineClass())
+                .setMachineType(testData.getMachineType())
                 .addSustainedUseDiscounts()
-                .setLocation(testData)
-                .setCommittedUsage(testData)
+                .setLocation(testData.getLocation())
+                .setCommittedUsage(testData.getCommittedUsage())
                 .addToEstimate()
                 .emailEstimate();
 
@@ -52,7 +52,6 @@ public class CalculatorTest extends AdditionalConditions{
                 .getTotalCostFromCalculatorPage();
         driver.switchTo().window(tabs.get(1));
         String emailCost = emailPage
-                .refresh()
                 .getTotalCostFromEmailPage();
 
         Assert.assertTrue(calculatorCost.contains(emailCost));

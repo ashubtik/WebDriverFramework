@@ -17,16 +17,13 @@ import java.util.concurrent.TimeUnit;
 
 public class EmailPage extends AbstractPage{
     private final Logger logger = LogManager.getRootLogger();
-    private final String MAIL_URL = "https://10minutemail.net";
+    private final String MAIL_URL = "https://10minemail.com";
 
-    @FindBy(xpath = "//button[@id='copy-button']")
+    @FindBy(xpath = "//button[contains (@class, 'btn-rds icon-btn bg-theme click-to-copy')]")
     private WebElement copyEmailButton;
 
     @FindBy(xpath = "//a[contains (text(), 'Google Cloud Platform Price Estimate')]")
     private WebElement openNewLetter;
-
-    @FindBy(xpath = "//i[contains (@class, 'fa fa-refresh')]//ancestor::a")
-    private WebElement refreshButton;
 
     public EmailPage(WebDriver driver) {
         super(driver);
@@ -34,20 +31,17 @@ public class EmailPage extends AbstractPage{
 
     public EmailPage openEmailPage(){
         driver.navigate().to(MAIL_URL);
+        logger.info("https://10minemail.com opened successfully");
         return this;
     }
 
     public String copyMailAddress() throws IOException, UnsupportedFlavorException {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='fe_text']")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='mail']")));
         copyEmailButton.click();
-        String myText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor); // extracting the text that was copied to the clipboard
+        String myText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+        logger.info("Email address was copied successfully");
         return myText;
-    }
-
-    public EmailPage refresh(){
-        refreshButton.click();
-        return new EmailPage(driver);
     }
 
     public String getTotalCostFromEmailPage(){
