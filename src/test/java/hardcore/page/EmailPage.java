@@ -22,7 +22,7 @@ public class EmailPage extends AbstractPage{
     @FindBy(xpath = "//button[contains (@class, 'btn-rds icon-btn bg-theme click-to-copy')]")
     private WebElement copyEmailButton;
 
-    @FindBy(xpath = "//a[contains (text(), 'Google Cloud Platform Price Estimate')]")
+    @FindBy(xpath = "//span[contains (text(), 'Google Cloud Sales')]")
     private WebElement openNewLetter;
 
     public EmailPage(WebDriver driver) {
@@ -46,7 +46,7 @@ public class EmailPage extends AbstractPage{
 
     public String getTotalCostFromEmailPage(){
         new WebDriverWait(driver, 200)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[contains (text(), 'Google Cloud Platform Price Estimate')]")));
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[contains (text(), 'Google Cloud Sales')]")));
         openNewLetter.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains (text(), 'USD')]")));
