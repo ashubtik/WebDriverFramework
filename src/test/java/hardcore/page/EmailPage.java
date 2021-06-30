@@ -17,12 +17,12 @@ import java.util.concurrent.TimeUnit;
 
 public class EmailPage extends AbstractPage{
     private final Logger logger = LogManager.getRootLogger();
-    private final String MAIL_URL = "https://10minemail.net/";
+    private final String MAIL_URL = "https://mailpoof.com/";
 
-    @FindBy(xpath = "//button[@class='icon__btn copy__btn']")
+    @FindBy(xpath = "//input[@id='eposta_adres']")
     private WebElement copyEmailButton;
 
-    @FindBy(xpath = "//span[contains (text(), 'Google Cloud')]")
+    @FindBy(xpath = "//button[contains (text(), 'Open')]")
     private WebElement openNewLetter;
 
     public EmailPage(WebDriver driver) {
@@ -37,8 +37,10 @@ public class EmailPage extends AbstractPage{
 
     public String copyMailAddress() throws IOException, UnsupportedFlavorException {
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='icon__btn copy__btn']")));
-        copyEmailButton.click();
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@action='Create']"))).click();
+        new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@action='copy']"))).click();
+//        copyEmailButton.click();
         String myText = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
         logger.info("Email address was copied successfully");
         return myText;
@@ -46,7 +48,7 @@ public class EmailPage extends AbstractPage{
 
     public String getTotalCostFromEmailPage(){
         new WebDriverWait(driver, 200)
-                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//p[contains (text(), 'Google Cloud')]"))).click();
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains (text(), 'Google Cloud Sales')]"))).click();
 //        openNewLetter.click();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains (text(), 'USD')]")));
