@@ -5,6 +5,7 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -50,6 +51,10 @@ public class EmailPage extends AbstractPage{
         new WebDriverWait(driver, 200)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains (text(), 'Google Cloud Sales')]"))).click();
 //        openNewLetter.click();
+        WebElement mailbody = driver.findElement(By.xpath("//div[@id='mails']"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(mailbody);
+        actions.perform();
         new WebDriverWait(driver, WAIT_TIMEOUT_SECONDS)
                 .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h3[contains (text(), 'USD')]")));
         String monthlyCost = driver.findElement(By.xpath("//h3[contains (text(), 'USD')]")).getText();
